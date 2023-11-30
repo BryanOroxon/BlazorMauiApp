@@ -1,0 +1,173 @@
+﻿@page "/chartdemo"
+
+@using ChartJs.Blazor.Util
+@using ChartJs.Blazor.PieChart
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<div class="container">
+    <h1 class="title">
+    ChartJS.Blazor Example!
+    <span class="icon-group">
+        <span class="icon-group">
+            <i class="fas fa-globe fa-1.5x icon"></i>
+            <i class="fas fa-mobile-alt fa-1.5x icon"></i>
+                <i class="fas fa-desktop fa-1.5x icon"></i>
+                <i class="fas fa-gamepad fa-1.5x icon"></i>
+                <i class="fas fa-robot fa-1.5x icon"></i>
+                <i class="fas fa-users-cog fa-1.5x icon"></i>
+                <i class="fas fa-cogs fa-1.5x icon"></i>
+        </span>
+    </span>
+</h1>
+<Chart Config="_pieConfig"></Chart>
+</div>
+<style>
+    h1 {
+        width: 500px;
+        margin: 0 auto;
+        background: gray;
+        text-align: center;
+    }
+    .icon-group {
+        margin-right: 20px;
+        margin-left: 20px;
+        width:500px;
+        text-align: center;
+        display: flex;
+        gap: 10px;
+    }
+
+    .icon {
+        color: #2edaff; /* Puedes ajustar el color según tus preferencias */
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .title {
+        position: relative;
+        color: #fff;
+        background: linear-gradient(to right, #3498db, #9b59b6);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .highlight-shape {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 10px;
+        background-color: #e74c3c;
+        border-radius: 5px;
+    }
+
+
+</style>
+
+@code {
+    private PieConfig _pieConfig;
+
+    protected override void OnInitialized()
+    {
+        configurePieConfig();
+    }
+
+    private void configurePieConfig()
+    {
+        _pieConfig = new PieConfig();
+
+        _pieConfig.Options = new PieOptions
+            {
+                Responsive = true,
+                Title = new OptionsTitle
+                {
+                    Display = true,
+                    Text = "Proporción de tipos de aplicaciones .NET 8"
+                }
+            };
+
+        foreach (var party in new[] { "Web", "Móvil", "Escritorio", "Juegos", "IoT", "Otros" })
+        {
+            _pieConfig.Data.Labels.Add(party);
+        }
+
+        var dataset = new PieDataset<int>(new[] { 40, 20, 15, 10, 10, 5 })
+            {
+                BackgroundColor = new[]
+                {
+                ColorUtil.ColorHexString(255, 25, 0),
+                ColorUtil.ColorHexString(25, 255, 0),
+                ColorUtil.ColorHexString(0, 25, 255),
+                ColorUtil.ColorHexString(153, 204, 255),
+                ColorUtil.ColorHexString(255, 153, 51),
+                ColorUtil.ColorHexString(255, 0, 255)
+            }
+            };
+
+        _pieConfig.Data.Datasets.Add(dataset);
+    }
+}
+
+
+
+@*
+@page "/chartdemo"
+
+@using ChartJs.Blazor.Util
+@using ChartJs.Blazor.PieChart
+
+<h1>ChartJS.Blazor Example!</h1>
+
+<Chart Config="_pieConfig"></Chart>
+
+@code {
+    private PieConfig _pieConfig;
+
+    protected override void OnInitialized()
+    {
+        configurePieConfig();
+    }
+
+    private void configurePieConfig()
+    {
+        _pieConfig = new PieConfig();
+
+        _pieConfig.Options = new PieOptions
+            {
+                Responsive = true,
+                Title = new OptionsTitle
+                {
+                    Display = true,
+                    Text = "Proporción de tipos de aplicaciones .NET 8"
+                }
+            };
+
+        foreach (var party in new[] { "Web", "Móvil", "Escritorio", "Juegos", "IoT", "Otros" })
+        {
+            _pieConfig.Data.Labels.Add(party);
+        }
+
+        var dataset = new PieDataset<int>(new[] { 40, 20, 15, 10, 10, 5 })
+            {
+                BackgroundColor = new[]
+                    {
+                ColorUtil.ColorHexString(255,25,0),
+                ColorUtil.ColorHexString(25,255,0),
+                ColorUtil.ColorHexString(0,25,255),
+                ColorUtil.ColorHexString(153,204,255),
+                ColorUtil.ColorHexString(255,153,51),
+                ColorUtil.ColorHexString(255, 0, 255)
+
+
+            }
+            };
+
+        _pieConfig.Data.Datasets.Add(dataset);
+
+    }
+}
+
+*@
