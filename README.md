@@ -1,0 +1,2 @@
+# BlazorMauiApp
+MAUI BLAZOR HYBRID APP DEMO
